@@ -44,6 +44,7 @@
       <p id="line1"><span class="prompt">root@lifeboat &gt;</span> <span id="copy1"></span><i id="cursor1" class="fas fa-square blinking"></i></p>
       <p id="line2"><span id="copy2"></span><i id="cursor2" class="fas fa-square blinking" style="display: none;"></i></p>
       <p id="line3"><span id="copy3"></span><i id="cursor3" class="fas fa-square blinking" style="display: none;"></i></p>
+      <p id="line4"><span id="copy4"></span><i id="cursor4" class="fas fa-square blinking" style="display: none;"></i></p>
     </div>   
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -52,14 +53,18 @@
     $(document).ready(function() {
       console.log('ready');
       var i = 0;
-      var copy1 = 'Environmental Control Subsystem failure #0025A. Time to repair… ';
       var prompt = 'root@lifeboat > ';
-      var copy2 = 'Environmental Control Subsystem diagnostic complete. All systems functioning OK.';
+      var copy1 = 'Running automated diagnostic... ';
+      var copy2 = 'Environmental Control Subsystem failure #0025A. Time to repair... ';
+      var copy3 = 'Environmental Control Subsystem diagnostic complete. All systems functioning OK.';
+      var percentage = 0;
+      var percentageComplete = 100;
       var time = moment('1970-01-01 06:00:00');
-      var stop = moment('1970-01-01 05:59:36');
+      var stop = moment('1970-01-01 05:59:54');
       var copyElement1 = $('#copy1');
       var copyElement2 = $('#copy2');
       var copyElement3 = $('#copy3');
+      var copyElement4 = $('#copy4');
 
       // Wait function
       function sleep(ms) {
@@ -72,6 +77,18 @@
           copyElement.append(copyText.charAt(i));
           await sleep(20);
         };
+      }
+
+      // Increase the percentage
+      async function progress() {
+        var progress = $('#progress');
+
+        do {
+          percentage++
+          progress.text(percentage + '%');
+          await sleep(50);
+        }
+        while (percentage < percentageComplete);
       }
 
       // Countdown the timer
@@ -92,21 +109,33 @@
         await sleep(5000); 
         await type(copyElement1, copy1);
         await sleep(1000);
-        // Countdown timer
-        copyElement1.append('<span id="timer">' + time.format('hh:mm:ss') + '</span>');
-        await sleep(1000);
-        await countdown();
+        // Percentage progress
+        copyElement1.append('<span id="progress">' + percentage + '%</span>');
+        await sleep(100);
+        await progress();
         // Second line -- command prompt
         $('#cursor1').remove();
         $('#cursor2').show();
+        // Second line -- error message
         await type(copyElement2, prompt);
         await sleep(1000);
-        // Second line -- message
         await type(copyElement2, copy2);
+        await sleep(1000);
+        // Countdown timer
+        copyElement2.append('<span id="timer">' + time.format('hh:mm:ss') + '</span>');
+        await sleep(1000);
+        await countdown();
         // Third line -- command prompt
         $('#cursor2').remove();
         $('#cursor3').show();
         await type(copyElement3, prompt);
+        await sleep(1000);
+        // Second line -- message
+        await type(copyElement3, copy3);
+        // Third line -- command prompt
+        $('#cursor3').remove();
+        $('#cursor4').show();
+        await type(copyElement4, prompt);
       };
       
       // Go!
