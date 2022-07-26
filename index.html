@@ -45,6 +45,11 @@
       <p id="line2"><span id="copy2"></span><i id="cursor2" class="fas fa-square blinking" style="display: none;"></i></p>
       <p id="line3"><span id="copy3"></span><i id="cursor3" class="fas fa-square blinking" style="display: none;"></i></p>
       <p id="line4"><span id="copy4"></span><i id="cursor4" class="fas fa-square blinking" style="display: none;"></i></p>
+      <p id="line5"><span id="copy5"></span><i id="cursor5" class="fas fa-square blinking" style="display: none;"></i></p>
+      <p id="line6" style="margin-top: 2rem;"><span id="copy6"></span><i id="cursor6" class="fas fa-square blinking" style="display: none;"></i></p>
+      <p id="line7"><span id="copy7"></span><i id="cursor7" class="fas fa-square blinking" style="display: none;"></i></p>
+      <p id="line8"><span id="copy8"></span><i id="cursor8" class="fas fa-square blinking" style="display: none;"></i></p>
+      <p id="line9"><span id="copy9"></span><i id="cursor9" class="fas fa-square blinking" style="display: none;"></i></p>
     </div>   
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -56,15 +61,29 @@
       var prompt = 'root@lifeboat > ';
       var copy1 = 'Running automated diagnostic... ';
       var copy2 = 'Environmental Control Subsystem failure #0025A. Time to repair... ';
-      var copy3 = 'Environmental Control Subsystem diagnostic complete. All systems functioning OK.';
+      var copy3 = 'Scheduled job: Environmental Control System efficiency diagnostic...';
+      var copy4 = 'Main Ventilation Ingest Tower efficiency: 63%';
+      var copy5 = 'Environmental Control Subsystem diagnostic complete. All systems functioning OK.';
+      
       var percentage = 0;
       var percentageComplete = 100;
       var time = moment('1970-01-01 06:00:00');
-      var stop = moment('1970-01-01 05:59:54');
+      // var time = moment('1970-01-01 05:49:08');
+      // var time = moment('1970-01-01 05:41:54');
+      // var time = moment('1970-01-01 05:32:58');
+      // var time = moment('1970-01-01 05:32:20');
+      var pause = moment('1970-01-01 05:32:19');
+      var stop = moment('1970-01-01 03:13:24');
+      // var stop = moment('1970-01-01 03:16:14');
       var copyElement1 = $('#copy1');
       var copyElement2 = $('#copy2');
       var copyElement3 = $('#copy3');
       var copyElement4 = $('#copy4');
+      var copyElement5 = $('#copy5');
+      var copyElement6 = $('#copy6');
+      var copyElement7 = $('#copy7');
+      var copyElement8 = $('#copy8');
+      var copyElement9 = $('#copy9');
 
       // Wait function
       function sleep(ms) {
@@ -92,8 +111,8 @@
       }
 
       // Countdown the timer
-      async function countdown() {
-        var timer = $('#timer');
+      async function countdown(timer, stop) {
+        var timer = $('#' + timer);
 
         do {
           time.subtract(1, 's');
@@ -106,7 +125,7 @@
       // Orchestrate the sequence of events
       async function go() {
         // First line
-        await sleep(5000); 
+        await sleep(10000); 
         await type(copyElement1, copy1);
         await sleep(1000);
         // Percentage progress
@@ -122,20 +141,62 @@
         await type(copyElement2, copy2);
         await sleep(1000);
         // Countdown timer
-        copyElement2.append('<span id="timer">' + time.format('hh:mm:ss') + '</span>');
+        copyElement2.append('<span id="timer1">' + time.format('hh:mm:ss') + '</span>');
         await sleep(1000);
-        await countdown();
+        await countdown('timer1', pause);
         // Third line -- command prompt
         $('#cursor2').remove();
         $('#cursor3').show();
         await type(copyElement3, prompt);
         await sleep(1000);
-        // Second line -- message
         await type(copyElement3, copy3);
-        // Third line -- command prompt
+        await sleep(1000);
+        // Fourth line -- command prompt
         $('#cursor3').remove();
         $('#cursor4').show();
-        await type(copyElement4, prompt);
+        await type(copyElement4, copy4);
+        await sleep(1000);
+        // Next line
+        $('#cursor4').remove();
+        $('#cursor5').show();
+        await type(copyElement5, prompt);
+        await sleep(1000);
+        await type(copyElement5, copy2);
+        // Countdown timer
+        await sleep(1000);
+        time.subtract(1, 's');
+        // time = moment('1970-01-01 05:25:18');
+        time = moment('1970-01-01 03:16:12');
+        copyElement5.append('<span id="timer2">' + time.format('hh:mm:ss') + '</span>');
+        await sleep(1000);
+        await countdown('timer2', stop);
+        // Next line
+        $('#cursor5').remove();
+        $('#cursor6').show();
+        await type(copyElement6, prompt);
+        await sleep(1000);
+        await type(copyElement6, copy5);
+        
+        // Next line
+        $('#cursor6').remove();
+        $('#cursor7').show();
+        await type(copyElement7, prompt);
+
+
+        // await sleep(1000);
+        // $('#cursor6').remove();
+        // $('#cursor7').show();
+        // await type(copyElement7, '');
+        // await sleep(1000);
+        // $('#cursor7').remove();
+        // $('#cursor8').show();
+
+        // await type(copyElement8, prompt);
+        // await type(copyElement8, copy5);
+        // // Next line
+        // $('#cursor8').remove();
+        // $('#cursor9').show();
+        // await type(copyElement9, prompt);
       };
       
       // Go!
