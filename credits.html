@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Lifeboat Operating System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      body {
+        background-color:  #333;
+        color:  #fff;
+        font-family:  Inconsolata-dz for Powerline, monospace;
+        font-size: 1.5rem;
+        line-height: 2rem;
+      }
+
+      div#main {
+        margin: 16rem 2rem 2rem 2rem;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .blinking{
+        animation: blinkingText 1.2s infinite;
+      }
+
+      @keyframes blinkingText{
+        0%{     color: #fff;    }
+        49%{    color: #fff; }
+        60%{    color: transparent; }
+        99%{    color:transparent;  }
+        100%{   color: #fff;    }
+      }
+
+      .prompt {
+        color:  #fff;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <p id="line"><span class="prompt">root@lifeboat &gt;</span> <span id="copy"></span><i id="cursor" class="fas fa-square blinking"></i></p>
+    </div>   
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    $(document).ready(function() {
+      console.log('ready');
+      var prompt = 'root@lifeboat > ';
+      var credits;
+      var copyElement = $('#copy');
+      var mainElement = $('#main');
+      var rowLength = 60;
+
+      // Wait function
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      // Get credits
+      async function fetchCredits() {
+        let response = await fetch('credits.json');
+        let data = await response.json();
+        credits = data;
+      }
+      
+      // Type text
+      async function type(copyElement, copyText) {
+        for (var i = 0; i <= copyText.length - 1; i++) {
+          copyElement.append(copyText.charAt(i));
+          await sleep(20);
+        };
+      }
+
+      // Scroll
+      function scroll(mainElement, copyElement) {
+        mainElement.css('margin-top', '-=32');
+        copyElement.append('<br>');
+        copyElement.append('&nbsp;'.repeat(prompt.length));
+      }
+
+      // Type credit
+      async function typeCredit(credit) {
+        await type(copyElement, credit.role);
+        await sleep(1000);
+      }
+
+      // Type centred
+      async function centerType(copyElement, copyText) {
+        copyElement.append('&nbsp;'.repeat((rowLength - copyText.length)/2));
+        await type(copyElement, copyText);
+      }
+
+      // Orchestrate the sequence of events
+      async function go() {
+        // Get credits
+        await fetchCredits();
+
+        // Pause
+        await sleep(1000);
+        
+        // Loop through credits
+        for (let credit of credits) {
+          // What type is this?
+          if (credit.type === 'center') {
+            // Type centred title
+            scroll(mainElement, copyElement);
+            await centerType(copyElement, credit.role);
+
+            // Type centred subtitle
+            for (var i = 0; i < credit.heldBy.length; i++) {
+              scroll(mainElement, copyElement);
+              await centerType(copyElement, credit.heldBy[i]);
+              await sleep(500);
+            }
+            
+          } else {
+            // Type role
+            await type(copyElement, credit.role);
+            await sleep(500);
+
+            // Type first person
+            var leading = '.'.repeat(rowLength - credit.role.length - credit.heldBy[0].length);
+            await type(copyElement, ' ' + leading + ' ' + credit.heldBy[0]);
+
+            // Type subsequent persons
+            for (var i = 1; i < credit.heldBy.length; i++) {
+              scroll(mainElement, copyElement);
+              copyElement.append('&nbsp;'.repeat(rowLength - credit.heldBy[i].length + 2));
+              await type(copyElement, credit.heldBy[i]);
+            }
+          }
+          
+          // Scroll
+          await sleep(3000);
+          if (credit != credits[credits.length - 1]) {
+            scroll(mainElement, copyElement);
+          }
+        }
+        
+      };
+      
+      // Go!
+      go();
+      
+    });
+  </script>
+</html>
