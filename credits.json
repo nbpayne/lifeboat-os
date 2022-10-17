@@ -113,6 +113,13 @@
         "type": "credit"
     },
     {
+        "role": "\"The Suit\" created by",
+        "heldBy":
+        [
+            "Philip Masterson"
+        ]
+    },
+    {
         "heldBy":
         [
             "Daniel Becker",
