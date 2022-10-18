@@ -4,7 +4,7 @@
         [
             "Nick Payne"
         ],
-        "role": "Written by",
+        "role": "Written and Directed by",
         "type": "credit"
     },
     {
@@ -30,7 +30,15 @@
         [
             "Nick Payne"
         ],
-        "role": "Directed by",
+        "role": "Edited by",
+        "type": "credit"
+    },
+    {
+        "heldBy":
+        [
+            "Jolin Jiang"
+        ],
+        "role": "Music Composed by",
         "type": "credit"
     },
     {
@@ -98,9 +106,9 @@
     {
         "heldBy":
         [
-            "Nick Payne"
+            "Philip Masterson"
         ],
-        "role": "Edited by",
+        "role": "First Assistant Director",
         "type": "credit"
     },
     {
@@ -122,15 +130,6 @@
     {
         "heldBy":
         [
-            "Daniel Becker",
-            "Simon Oeyen"
-        ],
-        "role": "Sound Recorded by",
-        "type": "credit"
-    },
-    {
-        "heldBy":
-        [
             "Bryan Fisher",
             "Lyn Taylor",
             "Maria Reynolds"
@@ -141,17 +140,26 @@
     {
         "heldBy":
         [
-            "Nick Payne"
+            "Daniel Becker",
+            "Simon Oeyen"
         ],
-        "role": "Colour Graded by",
+        "role": "Sound Recorded by",
         "type": "credit"
     },
     {
         "heldBy":
         [
-            "Jolin Jiang"
+            "Nick Payne"
         ],
-        "role": "Score by",
+        "role": "ADR and Sound Design by",
+        "type": "credit"
+    },
+    {
+        "heldBy":
+        [
+            "Nick Payne"
+        ],
+        "role": "Colour Graded by",
         "type": "credit"
     },
     {
