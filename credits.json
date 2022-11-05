@@ -52,14 +52,6 @@
     {
         "heldBy":
         [
-            "Anthony Darvall"
-        ],
-        "role": "David",
-        "type": "credit"
-    },
-    {
-        "heldBy":
-        [
             "Blake Hurford"
         ],
         "role": "Mark",
@@ -95,6 +87,14 @@
             "Charlotte Wood"
         ],
         "role": "Dani",
+        "type": "credit"
+    },
+    {
+        "heldBy":
+        [
+            "Anthony Darvall"
+        ],
+        "role": "David",
         "type": "credit"
     },
     {
@@ -167,7 +167,7 @@
         [
             "Darrin Baker",
             "Craig Moffat",
-            "Airspace Projects Marrickville"
+            "AIRspace Projects Marrickville"
         ],
         "role": "Special Thanks to:",
         "type": "center"
