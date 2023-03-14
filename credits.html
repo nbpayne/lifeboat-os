@@ -63,6 +63,7 @@
       // Get credits
       async function fetchCredits() {
         let response = await fetch('credits.json');
+        // let response = await fetch('credits-test.json');
         let data = await response.json();
         credits = data;
       }
@@ -116,8 +117,7 @@
               await centerType(copyElement, credit.heldBy[i]);
               await sleep(500);
             }
-            
-          } else {
+          } else if (credit.type == 'credit') {
             // Type role
             await type(copyElement, credit.role);
             await sleep(500);
@@ -132,10 +132,17 @@
               copyElement.append('&nbsp;'.repeat(rowLength - credit.heldBy[i].length + 2));
               await type(copyElement, credit.heldBy[i]);
             }
+          } else if (credit.type == 'scroll') {
+            do {
+              scroll(mainElement, copyElement);
+              await sleep(100);
+              i++;
+            }
+            while (i < credit.times);
           }
           
           // Scroll
-          await sleep(3000);
+          await sleep(1000);
           if (credit != credits[credits.length - 1]) {
             scroll(mainElement, copyElement);
           }

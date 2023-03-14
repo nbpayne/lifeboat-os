@@ -42,6 +42,10 @@
         "type": "credit"
     },
     {
+        "type": "scroll",
+        "times": 10
+    },
+    {
         "heldBy":
         [
             "(in order of appearance)"
@@ -98,6 +102,10 @@
         "type": "credit"
     },
     {
+        "type": "scroll",
+        "times": 10
+    },
+    {
         "heldBy":
         [],
         "role": "Crew",
@@ -121,11 +129,12 @@
         "type": "credit"
     },
     {
-        "role": "\"The Suit\" created by",
         "heldBy":
         [
             "Philip Masterson"
-        ]
+        ],
+        "role": "\"The Suit\" created by",
+        "type": "credit"
     },
     {
         "heldBy":
@@ -163,6 +172,22 @@
         "type": "credit"
     },
     {
+        "type": "scroll",
+        "times": 10
+    },
+    {
+        "heldBy":
+        [
+            "Sam Newton"
+        ],
+        "role": "[punk song] written by",
+        "type": "center"
+    },
+    {
+        "type": "scroll",
+        "times": 10
+    },
+    {
         "heldBy":
         [
             "Darrin Baker",
@@ -173,9 +198,25 @@
         "type": "center"
     },
     {
+        "type": "scroll",
+        "times": 12
+    },
+    {
         "heldBy":
         [
-            "(c) 2020-22 Nick Payne"
+            "Gadigal people of the Eora nation"
+        ],
+        "role": "Filmed on the lands of the",
+        "type": "center"
+    },
+    {
+        "type": "scroll",
+        "times": 10
+    },
+    {
+        "heldBy":
+        [
+            "(c) 2020-23 Nick Payne"
         ],
         "role": "Lifeboat",
         "type": "center"
