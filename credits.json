@@ -43,7 +43,7 @@
     },
     {
         "type": "scroll",
-        "times": 10
+        "times": 32
     },
     {
         "heldBy":
@@ -103,7 +103,7 @@
     },
     {
         "type": "scroll",
-        "times": 10
+        "times": 32
     },
     {
         "heldBy":
@@ -173,7 +173,7 @@
     },
     {
         "type": "scroll",
-        "times": 10
+        "times": 32
     },
     {
         "heldBy":
@@ -181,12 +181,12 @@
             "Sam Newton",
             "and performed by [band name]"
         ],
-        "role": "[punk song] written by",
+        "role": "\"Underground\" written by",
         "type": "center"
     },
     {
         "type": "scroll",
-        "times": 11
+        "times": 32
     },
     {
         "heldBy":
@@ -200,7 +200,7 @@
     },
     {
         "type": "scroll",
-        "times": 12
+        "times": 32
     },
     {
         "heldBy":
@@ -212,7 +212,7 @@
     },
     {
         "type": "scroll",
-        "times": 10
+        "times": 32
     },
     {
         "heldBy":
