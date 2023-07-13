@@ -123,7 +123,7 @@
         "heldBy":
         [
             "Jess Hole",
-            "Parker Craig"
+            "Parker Constantine"
         ],
         "role": "Production Design by",
         "type": "credit"
@@ -141,7 +141,7 @@
         [
             "Bryan Fisher",
             "Lyn Taylor",
-            "Maria Isabel Delaossa"
+            "Maria Isabel De La Ossa"
         ],
         "role": "Camera Operators",
         "type": "credit"
@@ -178,8 +178,17 @@
     {
         "heldBy":
         [
+            "Katie Brianna",
+            "Available on Stanley Records"
+        ],
+        "role": "\"Running Disaster\" written and performed by",
+        "type": "center"
+    },
+    {
+        "heldBy":
+        [
             "Sam Newton",
-            "and performed by [band name]"
+            "and performed by Sam Newton, Dave Favours, Nick Payne and Rebecca Clarke"
         ],
         "role": "\"Underground\" written by",
         "type": "center"
@@ -194,7 +203,8 @@
             "Darrin Baker",
             "Craig Moffat",
             "Patrick Hatfield",
-            "AIRspace Projects Marrickville"
+            "AIRspace Projects Marrickville",
+            "Michael Carpenter"
         ],
         "role": "Special Thanks to:",
         "type": "center"
